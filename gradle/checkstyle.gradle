@@ -1,0 +1,18 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    configFile = file("${projectDir}/practice/checkstyle/checkstyle.xml")
+    toolVersion '8.2'
+    ignoreFailures = false
+    sourceSets = [sourceSets.main]
+    checkstyleTest.enabled = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+build.dependsOn checkstyleMain

@@ -1,0 +1,19 @@
+version: '3'
+services:
+  crawler:
+    image: sunzhongmou/crawler:latest
+    container_name: crawler
+    networks:
+      - default
+      - services_net
+    ports:
+      - "8086:8086"
+    environment:
+      - DATASOURCE_USERNAME=admin
+      - DATASOURCE_PASSWORD=!cTtAKPs#!TW
+      - SPRING_PROFILES_ACTIVE=prod
+      - VIRTUAL_HOST=crawler.gitaction.com
+
+networks:
+  services_net:
+    external: true

@@ -1,0 +1,18 @@
+apply plugin: 'pmd'
+
+pmd {
+    ruleSetFiles = files("${projectDir}/practice/pmd/ruleset.xml")
+    ruleSets = []
+    ignoreFailures = false
+    sourceSets = [sourceSets.main]
+    pmdTest.enabled = false
+}
+
+tasks.withType(Pmd) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+build.dependsOn pmdMain

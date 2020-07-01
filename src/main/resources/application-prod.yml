@@ -1,0 +1,28 @@
+server:
+  port: 8086
+
+spring:
+  datasource:
+    url: jdbc:mysql://database/fsky?useSSL=false&serverTimezone=GMT%2B8&useLegacyDatetimeCode=false
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    initialization-mode: always
+  jpa:
+    properties:
+      hibernate: # 指定方言，方便hibernate生成合适的SQL statement
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: UTC
+  flyway:
+    enabled: true # 测试的时候有选择性关闭的需求，如功能测试
+    table: schema_version # 版本管理表名
+    baseline-on-migrate: true # 内部检测，在需要的时候，自动挂靠baseline操作
+  profiles:
+    active: local
+
+app:
+  jwt:
+    secret: JWT_SUPER_SECRET_KEY_PROD
+    expirationInMs: 604800000

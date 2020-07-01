@@ -1,0 +1,18 @@
+apply plugin: 'com.github.spotbugs'
+
+spotbugs {
+    effort = "min"
+    reportLevel = "high"
+    spotbugsTest.enabled = false
+}
+
+// Bug: https://github.com/novoda/gradle-static-analysis-plugin/issues/227
+//tasks.withType(com.github.spotbugs.SpotBugsTask) {
+//    reports {
+//        xml.enabled = false
+//        html.enabled = true
+//    }
+//}
+
+
+build.dependsOn spotbugsMain

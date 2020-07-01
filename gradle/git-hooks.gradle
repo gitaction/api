@@ -1,0 +1,10 @@
+task applyGitHooks(type: Copy) {
+    from new File("${projectDir}", "practice/git/pre-commit"), new File("${projectDir}", "practice/git/pre-push")
+
+    into {
+        new File("${projectDir}", '.git/hooks')
+    }
+    fileMode 0755
+}
+
+compileJava.dependsOn applyGitHooks

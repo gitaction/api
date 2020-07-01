@@ -1,0 +1,35 @@
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.00
+            }
+            excludes = [
+                    'top.fsky.crawler/application/configuration/**',
+                    'top.fsky.crawler/application/model/**',
+                    'top.fsky.crawlerApplication'
+            ]
+        }
+    }
+}
+
+jacocoTestCoverageVerification.dependsOn jacocoTestReport
+build.dependsOn jacocoTestCoverageVerification
