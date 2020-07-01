@@ -11,6 +11,20 @@ jacocoTestReport {
         csv.enabled false
         html.destination file("${buildDir}/jacocoHtml")
     }
+
+    jacocoTestReport {
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        'com/gitaction/api/application/**',
+                        'com/gitaction/api/domain/ddd/**',
+                        'com/gitaction/api/domain/exceptions/**',
+                        'com/gitaction/api/adapter/inbound/payloads/**',
+                        'com/gitaction/api/adapter/inbound/rpc/payloads/**'
+                ])
+            }))
+        }
+    }
 }
 
 jacocoTestCoverageVerification {
@@ -23,9 +37,9 @@ jacocoTestCoverageVerification {
                 minimum = 0.00
             }
             excludes = [
-                    'top.fsky.crawler/application/configuration/**',
-                    'top.fsky.crawler/application/model/**',
-                    'top.fsky.crawlerApplication'
+                    'com/gitaction/api/application/configuration/**',
+                    'com/gitaction/api/application/model/**',
+                    'com/gitaction/Application'
             ]
         }
     }

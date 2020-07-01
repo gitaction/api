@@ -12,6 +12,6 @@ class ArchitectureBaseTest {
     static void init() {
         classes = new ClassFileImporter()
                 .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
-                .importPackages("top.fsky.crawler");
+                .importPackages("com.gitaction.api");
     }
 }

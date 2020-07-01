@@ -1,6 +1,6 @@
 package architecture;
 
-import top.fsky.crawler.application.concept.BusinessService;
+import com.gitaction.api.application.concept.BusinessService;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

@@ -3,7 +3,7 @@ set -x
 
 # run the unit tests with the gradle wrapper
 ./gradlew :cleanTest :test --tests "architecture.*" 
-./gradlew :cleanTest :test --tests "top.fsky.crawler.unit.*" 
+./gradlew :cleanTest :test --tests "com.gitaction.api.unit.*" 
 
 # store the last exit code in a variable
 RESULT=$?

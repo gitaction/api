@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 
-@AnalyzeClasses(packages = "top.fsky.crawler", importOptions = { ImportOption.DoNotIncludeTests.class })
+@AnalyzeClasses(packages = "com.gitaction.api", importOptions = { ImportOption.DoNotIncludeTests.class })
 class LayersTest extends ArchitectureBaseTest {
 
     ImportOption ignoreTests = location -> {
@@ -16,24 +16,24 @@ class LayersTest extends ArchitectureBaseTest {
     };
     
     private final JavaClasses classes = new ClassFileImporter()
-            .withImportOption(ignoreTests).importPackages("top.fsky.crawler");
+            .withImportOption(ignoreTests).importPackages("com.gitaction.api");
 
     @Test
     void layer_dependencies_must_be_respected_include_the_tests() {
         layeredArchitecture()
 
                 .layer("REST")
-                .definedBy("top.fsky.crawler.adapter.inbound.rest..")
+                .definedBy("com.gitaction.api.adapter.inbound.rest..")
                 .whereLayer("REST")
                 .mayNotBeAccessedByAnyLayer()
 
                 .layer("Rpc")
-                .definedBy("top.fsky.crawler.adapter.inbound.rpc..")
+                .definedBy("com.gitaction.api.adapter.inbound.rpc..")
                 .whereLayer("Rpc")
                 .mayNotBeAccessedByAnyLayer()
                 
                 .layer("Application")
-                .definedBy("top.fsky.crawler.application..")
+                .definedBy("com.gitaction.api.application..")
                 .whereLayer("Application")
                 .mayOnlyBeAccessedByLayers( "Rpc", "REST")
 

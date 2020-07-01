@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Java CI CD with Gradle
 
 on:
   push:
@@ -25,15 +25,14 @@ jobs:
     - name: Run architecture test
       run: ./gradlew :test --tests "architecture.*"
     - name: Run unit test
-      run: ./gradlew :test --tests "top.fsky.crawler.unit.*"
+      run: ./gradlew :test --tests "com.gitaction.api.unit.*"
     - name: Run function test
-      run: ./gradlew :test --tests "top.fsky.crawler.function.*"
+      run: ./gradlew :test --tests "com.gitaction.api.function.*"
     - name: Build with Gradle exclude tests
       run: ./gradlew build -x test
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: true
@@ -50,4 +49,4 @@ jobs:
         host: ${{ secrets.CC_HOST }}
         username: ${{ secrets.CC_USERNAME }}
         password: ${{ secrets.CC_PASSWORD }}
-        script: cd /root/github/tcloud-cvm-provision/docker/crawler && ./deploy.sh
+        script: cd /root/github/tcloud-cvm-provision/docker/gitaction/api && ./deploy.sh
